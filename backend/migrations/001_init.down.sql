@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS promo_codes;
+DROP TABLE IF EXISTS users;
