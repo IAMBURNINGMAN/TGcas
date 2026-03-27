@@ -24,13 +24,13 @@ func (b *Bot) handleCallback(cb *tgbotapi.CallbackQuery) {
 
 	if err := wallet.Debit(b.db, cb.From.ID, bet, "bet:"+gameType); err != nil {
 		if err == wallet.ErrInsufficientFunds {
-			b.api.AnswerCallbackQuery(tgbotapi.NewCallback(cb.ID, "Сабинок не хватает! 😢"))
+			b.api.Request(tgbotapi.NewCallback(cb.ID, "Сабинок не хватает! 😢"))
 		} else {
-			b.api.AnswerCallbackQuery(tgbotapi.NewCallback(cb.ID, "Ошибка 😢"))
+			b.api.Request(tgbotapi.NewCallback(cb.ID, "Ошибка 😢"))
 		}
 		return
 	}
-	b.api.AnswerCallbackQuery(tgbotapi.NewCallback(cb.ID, ""))
+	b.api.Request(tgbotapi.NewCallback(cb.ID, ""))
 
 	var emoji string
 	switch gameType {
