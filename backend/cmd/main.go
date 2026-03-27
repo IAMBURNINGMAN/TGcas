@@ -1,5 +1,4 @@
-package cmd
+package main
 
 func main() {
-	// Initialize the database connection
 }
