@@ -35,7 +35,23 @@ func (b *Bot) Start() {
 	}
 }
 
+// send — отправить простое текстовое сообщение.
 func (b *Bot) send(chatID int64, text string) {
 	msg := tgbotapi.NewMessage(chatID, text)
 	b.api.Send(msg)
+}
+
+// sendMD — отправить сообщение с Markdown и inline-клавиатурой.
+func (b *Bot) sendMD(chatID int64, text string, kb tgbotapi.InlineKeyboardMarkup) {
+	msg := tgbotapi.NewMessage(chatID, text)
+	msg.ParseMode = "Markdown"
+	msg.ReplyMarkup = kb
+	b.api.Send(msg)
+}
+
+// editMD — отредактировать существующее сообщение с Markdown и inline-клавиатурой.
+func (b *Bot) editMD(chatID int64, msgID int, text string, kb tgbotapi.InlineKeyboardMarkup) {
+	edit := tgbotapi.NewEditMessageTextAndMarkup(chatID, msgID, text, kb)
+	edit.ParseMode = "Markdown"
+	b.api.Send(edit)
 }
